@@ -8,9 +8,9 @@
 I will be creating an application that allows 
 users to keep track of their workout routine 
 from day to day. This app will keep track of things like
-when you last went to the gym, to how many sets and reps 
+**when** you last went to the gym, to how **many** sets and reps 
 of a certain exercise you did. This app will be able to
-target any audience interested in keeping track of their 
+target **any** audience interested in keeping track of their 
 **gains!** 
 
 When working out, it is very important to **progressively
@@ -25,10 +25,10 @@ fun to create my own **progress tracker**.
 
 ### User Story
 
-- **As a user**, I want to be able to add exercises to the corresponding day :pencil2:
+- **As a user**, I want to be able to add exercises to the corresponding day :clipboard:
 - **As a user**, I want to be able to select common exercises or add my own :green_book:
-- **As a user**, I want to be able to input numbers of sets and reps and weight freely :wrench:
-- **As a user**, I want to be able to see my progress in a certain exercise easily :chart_with_upwards_trend:	
+- **As a user**, I want to be able to record details of certain exercises freely *(reps sets time weight)* :wrench:
+- **As a user**, I want to be able to easily see my progress in a certain exercise :chart_with_upwards_trend:	
 
 
 
