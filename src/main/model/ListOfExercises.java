@@ -11,22 +11,15 @@ public class ListOfExercises {
         listOfExercises = new ArrayList<>();
     }
 
-    public boolean addExercise(Exercise e) {
-        if (listOfExercises.contains(e)) {
-
-            listOfExercises.add(e);
-        }
-        return false;
+    public void addExercise(Exercise e) {
+        listOfExercises.add(e);
     }
 
 
-    public boolean removeExercise(Exercise e) {
-        if (listOfExercises.contains(e)) {
-
-            listOfExercises.remove(e);
-        }
-        return false;
+    public void removeExercise(Exercise e) {
+        listOfExercises.remove(e);
     }
+
 
 
 
