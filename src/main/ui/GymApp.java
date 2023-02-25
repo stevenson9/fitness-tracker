@@ -52,6 +52,7 @@ public class GymApp {
         System.out.println("\ta -> Add a new day");
         System.out.println("\tr -> Remove a past day");
         System.out.println("\tv -> View your progress!");
+        System.out.println("\ttp -> Track your progress on a certain exercise!");
         System.out.println("\tq -> quit");
 
     }
@@ -64,6 +65,8 @@ public class GymApp {
             removeDay();
         } else if (command.equals("v")) {
             viewLog();
+        } else if (command.equals("tp")) {
+            viewProgress();
         } else {
             System.out.println("That is not a valid option, try again!");
         }
@@ -78,9 +81,15 @@ public class GymApp {
         ListOfExercises loe = newExercises();
         Log log = new Log(date, type, loe);
 
-        logs.addLog(log);
+        if (logs.addLog(log)) {
+            System.out.println("New day successfully added!");
+        } else {
+            System.out.println("Sorry the corresponding date already has a entry!");
+        }
 
-        System.out.println("New day successfully added!");
+
+
+
 
     }
 
@@ -180,6 +189,21 @@ public class GymApp {
         viewLog();
 
         System.out.printf("index %d has been successfully removed!", index);
+    }
+
+    private void viewProgress() {
+        if (logs.getLength() == 0) {
+            System.out.println("There are no available exercises to track!");
+        }
+        System.out.println("What exercise would you like to track? (Case and Space sensitive)");
+        String select = input.next();
+
+        ListOfExercises filtered = logs.trackProgress(select);
+
+        System.out.printf("%s Progress! Keep it up!\n", select);
+        System.out.println("----------------------------------\n");
+        printWorkouts(filtered);
+
     }
 
 
