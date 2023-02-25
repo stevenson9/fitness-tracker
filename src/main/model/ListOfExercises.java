@@ -20,6 +20,7 @@ public class ListOfExercises {
         listOfExercises.remove(e);
     }
 
+    // REQUIRES: List of exercise must contain > 0 elements
     public Exercise getExercise(int index) {
         return listOfExercises.get(index);
     }
