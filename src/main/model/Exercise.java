@@ -21,7 +21,7 @@ public class Exercise {
         return this.exerciseName;
     }
 
-    public int weight() {
+    public int getWeight() {
         return this.weightUsed;
     }
 

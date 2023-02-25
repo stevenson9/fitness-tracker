@@ -11,12 +11,21 @@ public class ListOfLogs {
         listOfLogs = new ArrayList<>();
     }
 
-    public void addExercise(Log l) {
+    public void addLog(Log l) {
         listOfLogs.add(l);
     }
 
 
-    public void removeExercise(Log l) {
-        listOfLogs.remove(l);
+    public void removeLog(int i) {
+        listOfLogs.remove(i);
+    }
+
+    public int getLength() {
+        return listOfLogs.size();
+    }
+
+    //EFFECTS: return specified index of log
+    public Log getLog(int i) {
+        return listOfLogs.get(i);
     }
 }

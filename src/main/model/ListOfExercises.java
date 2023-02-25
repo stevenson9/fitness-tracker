@@ -20,6 +20,14 @@ public class ListOfExercises {
         listOfExercises.remove(e);
     }
 
+    public Exercise getExercise(int index) {
+        return listOfExercises.get(index);
+    }
+
+    public int getLength() {
+        return listOfExercises.size();
+    }
+
 
 
 
