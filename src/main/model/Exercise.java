@@ -1,5 +1,6 @@
 package model;
 
+// Represents a single exercise with name reps and sets and weight utilized
 public class Exercise {
 
     private String exerciseName;
@@ -7,7 +8,8 @@ public class Exercise {
     private int numberOfSets;
     private int weightUsed;
 
-
+    // REQUIRES: name has non-zero length
+    // EFFECTS: constructs an exercise with given name reps sets and weight
     public Exercise(String name, int reps, int sets, int weight) {
 
         this.exerciseName = name;

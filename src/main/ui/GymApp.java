@@ -57,7 +57,6 @@ public class GymApp {
 
     }
 
-
     private void processOption(String command) {
         if (command.equals("a")) {
             addNewDay();
@@ -87,10 +86,6 @@ public class GymApp {
             System.out.println("Sorry the corresponding date already has a entry!");
         }
 
-
-
-
-
     }
 
     private String pickTypeOfWorkout() {
@@ -101,16 +96,12 @@ public class GymApp {
             type = input.next();
             type = type.toLowerCase();
         }
-
         return type;
     }
 
     private ListOfExercises newExercises() {
-
         String cont = "y";
-
         ListOfExercises loe = new ListOfExercises();
-
 
         while (cont.equals("y")) {
             System.out.println("What exercise would you like to add?");
@@ -127,7 +118,6 @@ public class GymApp {
             System.out.println("Would you like to add another exercise? (y or n)");
             cont = input.next();
             cont = cont.toLowerCase();
-
         }
         return loe;
     }
@@ -142,24 +132,20 @@ public class GymApp {
             System.out.printf("index: [%d]\n", i + 1);
             viewDay(logs.getLog(i));
         }
-
     }
 
     private void viewDay(Log log) {
-
         ListOfExercises loe = log.getExercises();
 
         System.out.println("----------------------------------");
         System.out.printf("Day: %s\n", log.getDate());
         System.out.printf("Type: %s\n", log.getType());
         System.out.println("----------------------------------");
+
         printWorkouts(loe);
-
-
     }
 
     private void printWorkouts(ListOfExercises loe) {
-
         for (int i = 0; i < loe.getLength(); i++) {
             Exercise exerciseSelected = loe.getExercise(i);
 
@@ -167,11 +153,8 @@ public class GymApp {
             System.out.printf(" %d Sets of", exerciseSelected.getSets());
             System.out.printf(" %d Reps", exerciseSelected.getReps());
             System.out.printf(" @ %d lbs\n", exerciseSelected.getWeight());
-
         }
-
         System.out.println("----------------------------------");
-
     }
 
     private void removeDay() {
@@ -187,7 +170,6 @@ public class GymApp {
         logs.removeLog(index - 1);
 
         viewLog();
-
         System.out.printf("index %d has been successfully removed!", index);
     }
 
@@ -203,7 +185,6 @@ public class GymApp {
         System.out.printf("%s Progress! Keep it up!\n", select);
         System.out.println("----------------------------------\n");
         printWorkouts(filtered);
-
     }
 
 

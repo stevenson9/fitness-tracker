@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// Represents a list of log entries
 public class ListOfLogs {
 
     private List<Log> listOfLogs;
 
+    // EFFECTS: Constructs an empty list of logs
     public ListOfLogs() {
         listOfLogs = new ArrayList<>();
     }
 
+    // EFFECTS: iterate through the existing list of logs,
+    //          - if there is already a log with the same date as the one you are trying to add
+    //              -return false and don't add to list of logs
+    //          - otherwise return true and add it to the list of logs
     public boolean addLog(Log l) {
-
         for (Log log : listOfLogs) {
             String date = log.getDate();
 
@@ -25,7 +30,7 @@ public class ListOfLogs {
         return true;
     }
 
-
+    // EFFECTS: removes log entry to the list of exercise given index i
     public void removeLog(int i) {
         listOfLogs.remove(i);
     }
@@ -34,13 +39,19 @@ public class ListOfLogs {
         return listOfLogs.size();
     }
 
-    //EFFECTS: return specified index of log
+    // EFFECTS: returns a Log given the index i of the list
     public Log getLog(int i) {
         return listOfLogs.get(i);
     }
 
-    public ListOfExercises trackProgress(String e) {
 
+    // EFFECTS: given a string e,
+    //          - create new filtered list of exercise
+    //          - iterate through the list of logs and retrieve the list of exercise for each
+    //          - iterate through the list of exercise and see if there are any exercise with same name as string e,
+    //              - if found, add to new filtered list
+    //          - when the iterations are complete, return the newly filtered list of exercises.
+    public ListOfExercises trackProgress(String e) {
         ListOfExercises filteredExercise = new ListOfExercises();
 
         for (Log log : listOfLogs) {
@@ -50,11 +61,8 @@ public class ListOfLogs {
                     filteredExercise.addExercise(exercises.getExercise(i));
                 }
             }
-
         }
-
         return filteredExercise;
-
     }
 
 
