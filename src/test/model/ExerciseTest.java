@@ -14,6 +14,7 @@ public class ExerciseTest {
     }
 
     @Test
+    // Simple test for the constructor
     void testConstructor() {
         assertEquals("Bench Press", testExercise.getName());
         assertEquals(5, testExercise.getReps());

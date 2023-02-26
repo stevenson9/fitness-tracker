@@ -20,12 +20,14 @@ public class ListOfExercisesTest {
     }
 
     @Test
+    // Test for when nothing has been added to the list of exercises
     void testEmptyList() {
         assertEquals(0, testListOfExercises.getLength());
 
     }
 
     @Test
+    // Tests for add and remove method
     void testAddRemoveExercise() {
         testListOfExercises.addExercise(testExercise1);
 

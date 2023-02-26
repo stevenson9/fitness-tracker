@@ -14,6 +14,7 @@ public class ListOfLogs {
         listOfLogs = new ArrayList<>();
     }
 
+    // MODIFIES: this
     // EFFECTS: iterate through the existing list of logs,
     //          - if there is already a log with the same date as the one you are trying to add
     //              -return false and don't add to list of logs
@@ -30,6 +31,7 @@ public class ListOfLogs {
         return true;
     }
 
+    // MODIFIES: this
     // EFFECTS: removes log entry to the list of exercise given index i
     public void removeLog(int i) {
         listOfLogs.remove(i);
@@ -44,7 +46,7 @@ public class ListOfLogs {
         return listOfLogs.get(i);
     }
 
-
+    // MODIFIES: filteredExercise
     // EFFECTS: given a string e,
     //          - create new filtered list of exercise
     //          - iterate through the list of logs and retrieve the list of exercise for each

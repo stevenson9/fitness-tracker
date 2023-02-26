@@ -10,16 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// Gym Tracker Application
 public class GymApp {
 
     private ListOfLogs logs;
-
+    private Log log;
+    private ListOfExercises listOfExercises = new ListOfExercises();
+    private Exercise exercise1 = new Exercise("Bench Press", 5, 5, 145);
+    private Exercise exercise2 = new Exercise("Incline Dumbbell Press", 10, 4, 45);
     private Scanner input;
 
+    // EFFECTS: runs the gym tracker application
     public GymApp() {
         runGymApp();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     public void runGymApp() {
         boolean keepGoing = true;
         String command = null;
@@ -41,12 +48,21 @@ public class GymApp {
         System.out.println("\nGoodbye!");
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: initializes the list of logs
     private void init() {
         logs = new ListOfLogs();
+        listOfExercises.addExercise(exercise1);
+        listOfExercises.addExercise(exercise2);
+        log = new Log("02/25/23", "Push", listOfExercises);
+        logs.addLog(log);
+
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
 
+    // EFFECTS: displays options for the user
     private void optionMenu() {
         System.out.println("\nWelcome to the Gym Tracker App! Select from one of the options below:");
         System.out.println("\ta -> Add a new day");
@@ -57,6 +73,8 @@ public class GymApp {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user inputs
     private void processOption(String command) {
         if (command.equals("a")) {
             addNewDay();
@@ -72,6 +90,8 @@ public class GymApp {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a new day entry to tracker
     private void addNewDay() {
         System.out.println("What day would you like to add a new workout to? (MM/DD/YY)");
 
@@ -88,6 +108,8 @@ public class GymApp {
 
     }
 
+    // EFFECTS: allows the user to pick between 3 workout types, push, pull, or legs
+    //          - if user does not pick one of the 3, prompts the user again
     private String pickTypeOfWorkout() {
         String type = "";
 
@@ -99,6 +121,9 @@ public class GymApp {
         return type;
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: allows the user to construct a new exercise and add it to a list of exercises
     private ListOfExercises newExercises() {
         String cont = "y";
         ListOfExercises loe = new ListOfExercises();
@@ -122,6 +147,7 @@ public class GymApp {
         return loe;
     }
 
+    // EFFECTS: allows the user to see all entries of the gym tracker app
     private void viewLog() {
 
         if (logs.getLength() == 0) {
@@ -134,6 +160,7 @@ public class GymApp {
         }
     }
 
+    // EFFECTS: allows the user to view a certain entry day, given the log
     private void viewDay(Log log) {
         ListOfExercises loe = log.getExercises();
 
@@ -145,6 +172,8 @@ public class GymApp {
         printWorkouts(loe);
     }
 
+    // EFFECTS: iterates through the list of exercises and shows the user information on
+    //          all exercises inside the given list of exercises
     private void printWorkouts(ListOfExercises loe) {
         for (int i = 0; i < loe.getLength(); i++) {
             Exercise exerciseSelected = loe.getExercise(i);
@@ -157,6 +186,8 @@ public class GymApp {
         System.out.println("----------------------------------");
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes an entry decided by the user
     private void removeDay() {
 
         if (logs.getLength() == 0) {
@@ -173,6 +204,7 @@ public class GymApp {
         System.out.printf("index %d has been successfully removed!", index);
     }
 
+    // EFFECTS: allows the user to view progress of an exercise they choose
     private void viewProgress() {
         if (logs.getLength() == 0) {
             System.out.println("There are no available exercises to track!");

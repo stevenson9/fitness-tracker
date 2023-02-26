@@ -14,11 +14,13 @@ public class ListOfExercises {
         listOfExercises = new ArrayList<>();
     }
 
+    // MODIFIES: this
     // EFFECTS: adds exercise to the list of exercise given exercise e
     public void addExercise(Exercise e) {
         listOfExercises.add(e);
     }
 
+    // MODIFIES: this
     // EFFECTS: removes exercise to the list of exercise given exercise e
     public void removeExercise(Exercise e) {
         listOfExercises.remove(e);

@@ -52,11 +52,13 @@ public class ListOfLogTest {
     }
 
     @Test
+    // Test for when nothing has been added to the list of logs
     void testEmptyConstructor() {
         assertEquals(0, testListOfLogs.getLength());
     }
 
     @Test
+    // Testing the add and remove methods
     void testAddRemoveLogs() {
         assertTrue(testListOfLogs.addLog(testLog1));
         assertTrue(testListOfLogs.addLog(testLog2));
@@ -74,6 +76,7 @@ public class ListOfLogTest {
     }
 
     @Test
+    // Test for when a user tries to add a log that has the same date has a log already in the list
     void testAddSameDateLog() {
         assertTrue(testListOfLogs.addLog(testLog1));
         assertTrue(testListOfLogs.addLog(testLog2));
@@ -86,6 +89,7 @@ public class ListOfLogTest {
     }
 
     @Test
+    // Test for TrackProgress method
     void testTrackProgress() {
         assertTrue(testListOfLogs.addLog(testLog1));
         assertTrue(testListOfLogs.addLog(testLog2));

@@ -22,6 +22,7 @@ public class LogTest {
     }
 
     @Test
+    // Simple tests for the constructor
     void testConstructor() {
         assertEquals("02/25/23", testLog.getDate());
         assertEquals("Push", testLog.getType());
