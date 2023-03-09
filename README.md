@@ -28,7 +28,9 @@ fun to create my own **progress tracker**.
 - **As a user**, I want to be able to add exercises to the corresponding day :clipboard:
 - **As a user**, I want to be able to select common exercises or add my own :green_book:
 - **As a user**, I want to be able to record details of certain exercises freely *(reps sets time weight)* :wrench:
-- **As a user**, I want to be able to easily see my progress in a certain exercise :chart_with_upwards_trend:	
+- **As a user**, I want to be able to easily see my progress in a certain exercise :chart_with_upwards_trend:
+- **As a user**, Whenever I quit the app, I want to have the option to save my progress as a file
+- **As a suer**, Whenever I start the app, I want to have the option to load in my progress with a file
 
 
 

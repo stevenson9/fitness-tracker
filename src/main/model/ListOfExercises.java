@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a list of exercises
-public class ListOfExercises {
+public class ListOfExercises implements Writable {
 
     private List<Exercise> listOfExercises;
 
@@ -37,6 +41,20 @@ public class ListOfExercises {
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("exercises", listOfExercisesToJson());
+        return json;
+    }
 
+    private JSONArray listOfExercisesToJson() {
+        JSONArray jsonArray = new JSONArray();
 
+        for (Exercise e : listOfExercises) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
+    }
 }

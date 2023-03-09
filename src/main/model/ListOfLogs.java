@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 // Represents a list of log entries
-public class ListOfLogs {
+public class ListOfLogs implements Writable {
 
     private List<Log> listOfLogs;
 
@@ -68,5 +72,20 @@ public class ListOfLogs {
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("logs", listOfLogsToJson());
+        return json;
+    }
 
+    private JSONArray listOfLogsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Log log : listOfLogs) {
+            jsonArray.put(log.toJson());
+        }
+
+        return jsonArray;
+    }
 }

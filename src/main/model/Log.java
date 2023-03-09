@@ -1,10 +1,12 @@
 package model;
 
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 
 // Represents an entry into tracker app with date, type of workout, and list of exercises
-public class Log {
+public class Log implements Writable {
 
     private String date;
     private String type;
@@ -31,5 +33,22 @@ public class Log {
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("date", date);
+        json.put("type", type);
+        json.put("exercises", exercisesToJson());
+        return json;
+    }
+
+
+    private JSONArray exercisesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        jsonArray.put(listOfExercises.toJson());
+
+        return jsonArray;
+    }
 
 }
