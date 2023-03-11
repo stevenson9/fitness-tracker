@@ -1,0 +1,38 @@
+{"logs": [
+    {
+        "date": "03/10/23",
+        "exercises": [
+            {
+                "reps": 5,
+                "sets": 5,
+                "name": "Bench Press",
+                "weight": 145
+            },
+            {
+                "reps": 8,
+                "sets": 4,
+                "name": "Overhead Press",
+                "weight": 105
+            }
+        ],
+        "type": "push"
+    },
+    {
+        "date": "03/11/23",
+        "exercises": [
+            {
+                "reps": 5,
+                "sets": 5,
+                "name": "Deadlift",
+                "weight": 225
+            },
+            {
+                "reps": 12,
+                "sets": 4,
+                "name": "Dumbbell Curls",
+                "weight": 25
+            }
+        ],
+        "type": "pull"
+    }
+]}

@@ -1,7 +1,9 @@
 package persistence;
 
+import model.Exercise;
 import model.ListOfExercises;
 import model.ListOfLogs;
+import model.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,8 +14,6 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class JsonReader {
-    private String source;
-
     private String source;
 
     // EFFECTS: constructs reader to read from source file
@@ -42,30 +42,59 @@ public class JsonReader {
 
     // EFFECTS: parses workroom from JSON object and returns it
     private ListOfLogs parseListOfLogs(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
         ListOfLogs logs = new ListOfLogs();
-        ListOfExercises loe = new ListOfExercises();
-        addLogs(logs, loe, jsonObject);
+        addLogs(logs, jsonObject);
         return logs;
     }
 
     // MODIFIES: wr
     // EFFECTS: parses thingies from JSON object and adds them to workroom
-    private void addLogs(ListOfLogs logs, ListOfExercises loe, JSONObject jsonObject) {
+    private void addLogs(ListOfLogs logs, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("logs");
         for (Object json : jsonArray) {
             JSONObject nextLog = (JSONObject) json;
-            addLog(logs, nextLog);
+            addLog(logs,nextLog);
         }
     }
 
     // MODIFIES: wr
     // EFFECTS: parses thingy from JSON object and adds it to workroom
-    private void addLog(ListOfLogs wr, ListOfExercises loe, JSONObject jsonObject) {
+    private void addLog(ListOfLogs logs, JSONObject jsonObject) {
         String date = jsonObject.getString("date");
         String type = jsonObject.getString("type");
-        ListOfExercises exercises = addExercises(loe, jsonObject.getString("type"));
-        Thingy thingy = new Thingy(name, category);
-        wr.addThingy(thingy);
+        ListOfExercises exercises = parseListOfLoe(jsonObject.getJSONArray("exercises"));
+        Log log = new Log(date, type, exercises);
+        logs.addLog(log);
+
+
     }
+
+    private ListOfExercises parseListOfLoe(JSONArray jsonArray) {
+        ListOfExercises loe = new ListOfExercises();
+        addExercises(loe, jsonArray);
+        return loe;
+    }
+
+    private void addExercises(ListOfExercises loe, JSONArray jsonArray) {
+
+        for (Object json : jsonArray) {
+            JSONObject nextLog = (JSONObject) json;
+            addExercise(loe, nextLog);
+        }
+
+
+    }
+
+    private void addExercise(ListOfExercises loe, JSONObject jsonObject) {
+        String name = jsonObject.getString("name");
+        int reps = jsonObject.getInt("reps");
+        int sets = jsonObject.getInt("sets");
+        int weight = jsonObject.getInt("weight");
+
+        Exercise e = new Exercise(name, reps, sets, weight);
+        loe.addExercise(e);
+
+
+    }
+
 }

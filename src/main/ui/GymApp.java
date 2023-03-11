@@ -4,7 +4,12 @@ import model.Exercise;
 import model.ListOfExercises;
 import model.ListOfLogs;
 import model.Log;
+import org.json.JSONArray;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +24,14 @@ public class GymApp {
     private Exercise exercise1 = new Exercise("Bench Press", 5, 5, 145);
     private Exercise exercise2 = new Exercise("Incline Dumbbell Press", 10, 4, 45);
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/tracker.json";
 
     // EFFECTS: runs the gym tracker application
-    public GymApp() {
+    public GymApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runGymApp();
     }
 
@@ -69,6 +79,8 @@ public class GymApp {
         System.out.println("\tr -> Remove a past day");
         System.out.println("\tv -> View your progress!");
         System.out.println("\ttp -> Track your progress on a certain exercise!");
+        System.out.println("\ts -> Save your days added to a file");
+        System.out.println("\tl -> Load your days from a file");
         System.out.println("\tq -> quit");
 
     }
@@ -84,6 +96,10 @@ public class GymApp {
             viewLog();
         } else if (command.equals("tp")) {
             viewProgress();
+        } else if (command.equals("s")) {
+            saveTracker();
+        } else if (command.equals("l")) {
+            loadTracker();
         } else {
             System.out.println("That is not a valid option, try again!");
         }
@@ -217,6 +233,26 @@ public class GymApp {
         System.out.printf("%s Progress! Keep it up!\n", select);
         System.out.println("----------------------------------\n");
         printWorkouts(filtered);
+    }
+
+    private void saveTracker() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(logs);
+            jsonWriter.close();
+            System.out.println("Saved all days in tracker to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    private void loadTracker() {
+        try {
+            logs = jsonReader.read();
+            System.out.println("Loaded your previous days from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 

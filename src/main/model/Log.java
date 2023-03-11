@@ -44,11 +44,9 @@ public class Log implements Writable {
 
 
     private JSONArray exercisesToJson() {
-        JSONArray jsonArray = new JSONArray();
+        JSONArray jsonObject = listOfExercises.listOfExercisesToJson();
 
-        jsonArray.put(listOfExercises.toJson());
-
-        return jsonArray;
+        return jsonObject;
     }
 
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Represents a list of exercises
-public class ListOfExercises implements Writable {
+public class ListOfExercises {
 
     private List<Exercise> listOfExercises;
 
@@ -41,14 +41,7 @@ public class ListOfExercises implements Writable {
     }
 
 
-    @Override
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("exercises", listOfExercisesToJson());
-        return json;
-    }
-
-    private JSONArray listOfExercisesToJson() {
+    public JSONArray listOfExercisesToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Exercise e : listOfExercises) {
@@ -57,4 +50,6 @@ public class ListOfExercises implements Writable {
 
         return jsonArray;
     }
+
+
 }
