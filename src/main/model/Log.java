@@ -42,11 +42,11 @@ public class Log implements Writable {
         return json;
     }
 
-
+    // EFFECTS: returns all listofexercises in this log as a JSON Array
     private JSONArray exercisesToJson() {
-        JSONArray jsonObject = listOfExercises.listOfExercisesToJson();
+        JSONArray jsonArray = listOfExercises.listOfExercisesToJson();
 
-        return jsonObject;
+        return jsonArray;
     }
 
 }

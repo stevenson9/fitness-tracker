@@ -79,6 +79,7 @@ public class ListOfLogs implements Writable {
         return json;
     }
 
+    // EFFECTS: returns the logs in listoflogs as a JSON array
     private JSONArray listOfLogsToJson() {
         JSONArray jsonArray = new JSONArray();
 

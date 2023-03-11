@@ -13,7 +13,7 @@ public class JsonWriter {
     private PrintWriter writer;
     private String destination;
 
-    // EFFECTS: constructs writer to write to destination file
+    // EFFECTS: writer is constructed to write towards destination file
     public JsonWriter(String destination) {
         this.destination = destination;
     }
@@ -26,7 +26,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of listoflogs to file
     public void write(ListOfLogs logs) {
         JSONObject json = logs.toJson();
         saveToFile(json.toString(TAB));

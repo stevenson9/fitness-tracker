@@ -41,6 +41,7 @@ public class ListOfExercises {
     }
 
 
+    // EFFECTS: returns all exercises in this listofexercise as a JSON Array
     public JSONArray listOfExercisesToJson() {
         JSONArray jsonArray = new JSONArray();
 

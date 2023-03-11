@@ -18,13 +18,23 @@
         "type": "Push"
     },
     {
-        "date": "03/10/23",
+        "date": "03/11/23",
         "exercises": [{
             "reps": 5,
             "sets": 5,
-            "name": "Squat",
+            "name": "Deadlift",
             "weight": 225
         }],
-        "type": "legs"
+        "type": "pull"
+    },
+    {
+        "date": "03/12/23",
+        "exercises": [{
+            "reps": 5,
+            "sets": 5,
+            "name": "Bench Press",
+            "weight": 185
+        }],
+        "type": "push"
     }
 ]}

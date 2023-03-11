@@ -16,20 +16,20 @@ import java.util.stream.Stream;
 public class JsonReader {
     private String source;
 
-    // EFFECTS: constructs reader to read from source file
+    // EFFECTS: constructs a reader to read from a json file source
     public JsonReader(String source) {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
-    // throws IOException if an error occurs reading data from file
+    // EFFECTS: reads listoflogs from file and returns it;
+    // IOException is thrown when data cannot be read
     public ListOfLogs read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseListOfLogs(jsonObject);
     }
 
-    // EFFECTS: reads source file as string and returns it
+    // EFFECTS: returns the source file as a string after reading
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -40,15 +40,15 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses listoflogs from JSON object and returns it
     private ListOfLogs parseListOfLogs(JSONObject jsonObject) {
         ListOfLogs logs = new ListOfLogs();
         addLogs(logs, jsonObject);
         return logs;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: logs
+    // EFFECTS: parses logs from JSON object and adds them to logs
     private void addLogs(ListOfLogs logs, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("logs");
         for (Object json : jsonArray) {
@@ -57,8 +57,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: logs
+    // EFFECTS: parses individual log JSON object and adds it to logs
     private void addLog(ListOfLogs logs, JSONObject jsonObject) {
         String date = jsonObject.getString("date");
         String type = jsonObject.getString("type");
@@ -69,12 +69,15 @@ public class JsonReader {
 
     }
 
+    // EFFECTS: parses listofexercise from JSON Array and returns it
     private ListOfExercises parseListOfLoe(JSONArray jsonArray) {
         ListOfExercises loe = new ListOfExercises();
         addExercises(loe, jsonArray);
         return loe;
     }
 
+    // MODIFIES: loe
+    // EFFECTS: adds each individual exercise in parsed listofexercise to loe
     private void addExercises(ListOfExercises loe, JSONArray jsonArray) {
 
         for (Object json : jsonArray) {
@@ -85,6 +88,8 @@ public class JsonReader {
 
     }
 
+    // MODIFIES: loe
+    // EFFECTS: constructs each new exercise in loe and adds it to loe
     private void addExercise(ListOfExercises loe, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int reps = jsonObject.getInt("reps");

@@ -235,6 +235,7 @@ public class GymApp {
         printWorkouts(filtered);
     }
 
+    // EFFECTS: saves the listoflogs to a file
     private void saveTracker() {
         try {
             jsonWriter.open();
@@ -246,6 +247,8 @@ public class GymApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads listoflogs from a file
     private void loadTracker() {
         try {
             logs = jsonReader.read();
