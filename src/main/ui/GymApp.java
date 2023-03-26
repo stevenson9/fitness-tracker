@@ -8,6 +8,12 @@ import org.json.JSONArray;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLOutput;
@@ -16,95 +22,278 @@ import java.util.List;
 import java.util.Scanner;
 
 // Gym Tracker Application
-public class GymApp {
+public class GymApp extends JPanel {
 
     private ListOfLogs logs;
     private Log log;
     private ListOfExercises listOfExercises = new ListOfExercises();
-    private Exercise exercise1 = new Exercise("Bench Press", 5, 5, 145);
-    private Exercise exercise2 = new Exercise("Incline Dumbbell Press", 10, 4, 45);
+
     private Scanner input;
+
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/tracker.json";
+
+    private JFrame frame;
+    private JPanel optionPanel;
+    private JPanel logPanel;
+    private JPanel loePanel;
+    private JPanel exercisePanel;
+    private JPanel mainPanel;
+
+    private JList list;
+
+    private DefaultListModel listModel;
+    private AddListener addListener;
+
+    private JTextField date;
+    private JTextField type;
+    private JTextField name;
+    private JTextField reps;
+    private JTextField sets;
+    private JTextField weight;
+
 
     // EFFECTS: runs the gym tracker application
     public GymApp() throws FileNotFoundException {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        runGymApp();
-    }
-
-    // MODIFIES: this
-    // EFFECTS: processes user input
-    public void runGymApp() {
-        boolean keepGoing = true;
-        String command = null;
 
         init();
+        initializeGUI();
 
-        while (keepGoing) {
-            optionMenu();
-            command = input.next();
-            command = command.toLowerCase();
+    }
 
-            if (command.equals("q")) {
-                keepGoing = false;
-            } else {
-                processOption(command);
-            }
+    private void updateGui() {
+        frame.revalidate();
+        frame.repaint();
+    }
+
+
+    public void initializeGUI() {
+
+        setFrame();
+
+        optionPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(3, 1));
+
+        dayButtons();
+
+        saveLoad();
+
+        mainPanel.add(optionPanel);
+
+        initializeLogPanel();
+
+        loePanel = new JPanel();
+        listModel = new DefaultListModel<>();
+
+        list = new JList(listModel);
+
+        loePanel.add(list);
+        listModel.addElement("EXAMPLE: " + "Date: " +  log.getDate() + " Type: " + log.getType() + " | Exercise: "
+                + log.getExercises().getExercise(0).getName() + " "
+                + log.getExercises().getExercise(0).getReps() + "x"
+                + log.getExercises().getExercise(0).getSets() + " @ "
+                + log.getExercises().getExercise(0).getWeight() + "lbs");
+
+
+        mainPanel.add(loePanel);
+    }
+
+    private void dayButtons() {
+        JButton addDay = new JButton("Add Day");
+        addListener = new AddListener(addDay);
+        addDay.setActionCommand("Add Day");
+        addDay.addActionListener(addListener);
+
+        optionPanel.add(addDay);
+
+        JButton removeDay = new JButton("Remove Day");
+        removeDay.setActionCommand("Remove Day");
+        removeDay.addActionListener(new RemoveListener());
+
+
+        optionPanel.add(removeDay);
+    }
+
+    private void saveLoad() {
+        JButton saveTracker = new JButton("Save Tracker");
+        saveTracker.addActionListener(e -> saveTracker());
+        optionPanel.add(saveTracker);
+
+        JButton loadTracker = new JButton("Load Tracker");
+        loadTracker.addActionListener(e -> loadTracker());
+        optionPanel.add(loadTracker);
+    }
+
+    private void setFrame() {
+        frame = new JFrame("Gym Tracker");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 500);
+        frame.setVisible(true);
+
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(3, 1));
+        frame.add(mainPanel);
+    }
+
+    public void initializeLogPanel() {
+        logPanel = new JPanel();
+
+        date = new JTextField(6);
+        date.addActionListener(addListener);
+        date.getDocument().addDocumentListener(addListener);
+
+        type = new JTextField(5);
+        type.addActionListener(addListener);
+        type.getDocument().addDocumentListener(addListener);
+
+        logPanel.add(date);
+        logPanel.add(type);
+
+
+        exercisePanel = new JPanel();
+
+        exerciseField();
+
+
+        mainPanel.add(logPanel);
+    }
+
+    private void exerciseField() {
+        name = new JTextField(8);
+        name.addActionListener(addListener);
+        name.getDocument().addDocumentListener(addListener);
+        exercisePanel.add(name);
+
+        reps = new JTextField(4);
+        reps.addActionListener(addListener);
+        reps.getDocument().addDocumentListener(addListener);
+        exercisePanel.add(reps);
+
+        sets = new JTextField(4);
+        sets.addActionListener(addListener);
+        sets.getDocument().addDocumentListener(addListener);
+        exercisePanel.add(sets);
+
+        weight = new JTextField(6);
+        weight.addActionListener(addListener);
+        weight.getDocument().addDocumentListener(addListener);
+        exercisePanel.add(weight);
+
+        logPanel.add(exercisePanel);
+    }
+
+    class RemoveListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            int index = list.getSelectedIndex();
+            listModel.remove(index);
+
+            logs.removeLog(index);
+
         }
 
-        System.out.println("\nGoodbye!");
+
+
     }
+
+    class AddListener implements ActionListener, DocumentListener {
+
+        private boolean alreadyEnabled = true;
+        private JButton button;
+
+        public AddListener(JButton button) {
+            this.button = button;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String time = date.getText();
+            String day = type.getText();
+            String exercise = name.getText();
+            int rep = Integer.parseInt(reps.getText());
+            int set = Integer.parseInt(sets.getText());
+            int heavy = Integer.parseInt(weight.getText());
+
+            ListOfExercises loe = new ListOfExercises();
+
+            loe.addExercise(new Exercise(exercise, rep, set, heavy));
+
+            Log log = new Log(time, day, loe);
+
+
+
+            logs.addLog(log);
+
+            printLog(log);
+
+            resetFields();
+
+            updateGui();
+
+
+
+        }
+
+
+        private void resetFields() {
+            date.requestFocusInWindow();
+            date.setText("");
+            type.requestFocusInWindow();
+            type.setText("");
+            name.requestFocusInWindow();
+            name.setText("");
+            reps.requestFocusInWindow();
+            reps.setText("");
+            sets.requestFocusInWindow();
+            sets.setText("");
+            weight.requestFocusInWindow();
+            weight.setText("");
+        }
+
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+
+        }
+    }
+
+
+    public void printLog(Log log) {
+        listModel.addElement("Date: " +  log.getDate() + " Type: " + log.getType() + " | Exercise: "
+                + log.getExercises().getExercise(0).getName() + " "
+                + log.getExercises().getExercise(0).getReps() + "x"
+                + log.getExercises().getExercise(0).getSets() + " @ "
+                + log.getExercises().getExercise(0).getWeight() + "lbs");
+    }
+
 
 
     // MODIFIES: this
     // EFFECTS: initializes the list of logs
     private void init() {
         logs = new ListOfLogs();
-        listOfExercises.addExercise(exercise1);
-        listOfExercises.addExercise(exercise2);
+        listOfExercises.addExercise(new Exercise("Bench Press", 5, 5, 145));
         log = new Log("02/25/23", "Push", listOfExercises);
         logs.addLog(log);
 
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-    }
 
-    // EFFECTS: displays options for the user
-    private void optionMenu() {
-        System.out.println("\nWelcome to the Gym Tracker App! Select from one of the options below:");
-        System.out.println("\ta -> Add a new day");
-        System.out.println("\tr -> Remove a past day");
-        System.out.println("\tv -> View your progress!");
-        System.out.println("\ttp -> Track your progress on a certain exercise!");
-        System.out.println("\ts -> Save your days added to a file");
-        System.out.println("\tl -> Load your days from a file");
-        System.out.println("\tq -> quit");
+
+
 
     }
 
-    // MODIFIES: this
-    // EFFECTS: processes user inputs
-    private void processOption(String command) {
-        if (command.equals("a")) {
-            addNewDay();
-        } else if (command.equals("r")) {
-            removeDay();
-        } else if (command.equals("v")) {
-            viewLog();
-        } else if (command.equals("tp")) {
-            viewProgress();
-        } else if (command.equals("s")) {
-            saveTracker();
-        } else if (command.equals("l")) {
-            loadTracker();
-        } else {
-            System.out.println("That is not a valid option, try again!");
-        }
-
-    }
 
     // MODIFIES: this
     // EFFECTS: adds a new day entry to tracker
@@ -256,6 +445,15 @@ public class GymApp {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
+
+        listModel.removeAllElements();
+        for (Log log : logs.returnLogs()) {
+            printLog(log);
+        }
+
+        updateGui();
+
+
     }
 
 

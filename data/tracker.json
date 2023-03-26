@@ -1,40 +1,22 @@
 {"logs": [
     {
-        "date": "02/25/23",
-        "exercises": [
-            {
-                "reps": 5,
-                "sets": 5,
-                "name": "Bench Press",
-                "weight": 145
-            },
-            {
-                "reps": 10,
-                "sets": 4,
-                "name": "Incline Dumbbell Press",
-                "weight": 45
-            }
-        ],
-        "type": "Push"
+        "date": "1",
+        "exercises": [{
+            "reps": 1,
+            "sets": 1,
+            "name": "1",
+            "weight": 1
+        }],
+        "type": "1"
     },
     {
-        "date": "03/11/23",
+        "date": "2",
         "exercises": [{
-            "reps": 5,
-            "sets": 5,
-            "name": "Deadlift",
-            "weight": 225
+            "reps": 2,
+            "sets": 2,
+            "name": "2",
+            "weight": 2
         }],
-        "type": "pull"
-    },
-    {
-        "date": "03/12/23",
-        "exercises": [{
-            "reps": 5,
-            "sets": 5,
-            "name": "Bench Press",
-            "weight": 185
-        }],
-        "type": "push"
+        "type": "2"
     }
 ]}
