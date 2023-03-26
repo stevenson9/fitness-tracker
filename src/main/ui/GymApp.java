@@ -131,11 +131,20 @@ public class GymApp extends JPanel {
         frame = new JFrame("Gym Tracker");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
+
+        JLabel background = new JLabel(new ImageIcon("./image/background.png"));
+        background.setLayout(new FlowLayout());
+
+        frame.setContentPane(background);
+
         frame.setVisible(true);
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(3, 1));
         frame.add(mainPanel);
+
+
+
     }
 
     public void initializeLogPanel() {

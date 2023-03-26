@@ -1,5 +1,15 @@
 {"logs": [
     {
+        "date": "02/25/23",
+        "exercises": [{
+            "reps": 5,
+            "sets": 5,
+            "name": "Bench Press",
+            "weight": 145
+        }],
+        "type": "Push"
+    },
+    {
         "date": "1",
         "exercises": [{
             "reps": 1,
@@ -8,15 +18,5 @@
             "weight": 1
         }],
         "type": "1"
-    },
-    {
-        "date": "2",
-        "exercises": [{
-            "reps": 2,
-            "sets": 2,
-            "name": "2",
-            "weight": 2
-        }],
-        "type": "2"
     }
 ]}
