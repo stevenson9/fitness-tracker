@@ -3,6 +3,9 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ListOfLogTest {
@@ -102,6 +105,22 @@ public class ListOfLogTest {
         assertEquals("Bench Press", filteredList.getExercise(1).getName());
         assertEquals(145, filteredList.getExercise(0).getWeight());
         assertEquals(185, filteredList.getExercise(1).getWeight());
+
+    }
+
+    @Test
+
+    void testReturnLog() {
+        testListOfLogs.addLog(testLog1);
+        testListOfLogs.addLog(testLog2);
+        testListOfLogs.addLog(testLog3);
+
+        List<Log> logs = testListOfLogs.returnLogs();
+
+        assertEquals(3, logs.size());
+        assertEquals(testLog1, logs.get(0));
+
+
 
     }
 
