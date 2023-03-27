@@ -64,12 +64,14 @@ public class GymApp extends JPanel {
 
     }
 
+    // EFFECTS: updates the GUI after a new change
     private void updateGui() {
         frame.revalidate();
         frame.repaint();
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: Initializes the whole GUI, including frame and buttons
     public void initializeGUI() {
 
         setFrame();
@@ -101,6 +103,7 @@ public class GymApp extends JPanel {
         mainPanel.add(loePanel);
     }
 
+    // EFFECTS: Responsible for creating the Add/Remove Day Buttons
     private void dayButtons() {
         JButton addDay = new JButton("Add Day");
         addListener = new AddListener(addDay);
@@ -117,6 +120,8 @@ public class GymApp extends JPanel {
         optionPanel.add(removeDay);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Responsible for creating the Save/Load Buttons
     private void saveLoad() {
         JButton saveTracker = new JButton("Save Tracker");
         saveTracker.addActionListener(e -> saveTracker());
@@ -127,6 +132,8 @@ public class GymApp extends JPanel {
         optionPanel.add(loadTracker);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Responsible for creating the overall frame of the GUI
     private void setFrame() {
         frame = new JFrame("Gym Tracker");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,6 +154,9 @@ public class GymApp extends JPanel {
 
     }
 
+
+    // MODIFIES: this
+    // Initializes the Panel that contains the logs
     public void initializeLogPanel() {
         logPanel = new JPanel();
 
@@ -170,6 +180,8 @@ public class GymApp extends JPanel {
         mainPanel.add(logPanel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Initializes the text fields that users can input their exercise details
     private void exerciseField() {
         name = new JTextField(8);
         name.addActionListener(addListener);
@@ -194,6 +206,8 @@ public class GymApp extends JPanel {
         logPanel.add(exercisePanel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Actions for when the remove button is pressed.
     class RemoveListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -208,6 +222,8 @@ public class GymApp extends JPanel {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: Actions for when the Add button is pressed.
     class AddListener implements ActionListener, DocumentListener {
 
         private boolean alreadyEnabled = true;
@@ -278,7 +294,8 @@ public class GymApp extends JPanel {
         }
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: Adds the new log onto the panel which contains all the log information
     public void printLog(Log log) {
         listModel.addElement("Date: " +  log.getDate() + " Type: " + log.getType() + " | Exercise: "
                 + log.getExercises().getExercise(0).getName() + " "
