@@ -50,6 +50,10 @@ public class ListOfLogs implements Writable {
         return listOfLogs.get(i);
     }
 
+    public List<Log> returnLogs() {
+        return listOfLogs;
+    }
+
     // MODIFIES: filteredExercise
     // EFFECTS: given a string e,
     //          - create new filtered list of exercise

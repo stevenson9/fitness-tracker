@@ -1,30 +1,22 @@
 {"logs": [
     {
         "date": "02/25/23",
-        "exercises": [
-            {
-                "reps": 5,
-                "sets": 5,
-                "name": "Bench Press",
-                "weight": 145
-            },
-            {
-                "reps": 10,
-                "sets": 4,
-                "name": "Incline Dumbbell Press",
-                "weight": 45
-            }
-        ],
-        "type": "Push"
-    },
-    {
-        "date": "001000",
         "exercises": [{
             "reps": 5,
             "sets": 5,
-            "name": "Squat",
-            "weight": 225
+            "name": "Bench Press",
+            "weight": 145
         }],
-        "type": "legs"
+        "type": "Push"
+    },
+    {
+        "date": "1",
+        "exercises": [{
+            "reps": 1,
+            "sets": 1,
+            "name": "1",
+            "weight": 1
+        }],
+        "type": "1"
     }
 ]}
