@@ -1,22 +1,22 @@
 {"logs": [
     {
-        "date": "02/25/23",
+        "date": "03/27/23",
         "exercises": [{
             "reps": 5,
             "sets": 5,
-            "name": "Bench Press",
-            "weight": 145
+            "name": "Pull ups",
+            "weight": 45
         }],
-        "type": "Push"
+        "type": "Pull"
     },
     {
-        "date": "1",
+        "date": "03/28/23",
         "exercises": [{
-            "reps": 1,
-            "sets": 1,
-            "name": "1",
-            "weight": 1
+            "reps": 5,
+            "sets": 5,
+            "name": "Squat",
+            "weight": 135
         }],
-        "type": "1"
+        "type": "Legs"
     }
 ]}

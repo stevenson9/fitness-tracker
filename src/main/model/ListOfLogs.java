@@ -59,6 +59,7 @@ public class ListOfLogs implements Writable {
         return listOfLogs.get(i);
     }
 
+    // EFFECTS: returns all the logs currently in logs
     public List<Log> returnLogs() {
         return listOfLogs;
     }
