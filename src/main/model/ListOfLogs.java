@@ -12,6 +12,9 @@ import java.util.Objects;
 public class ListOfLogs implements Writable {
 
     private List<Log> listOfLogs;
+    private EventLog eventLog = EventLog.getInstance();
+
+
 
     // EFFECTS: Constructs an empty list of logs
     public ListOfLogs() {
@@ -32,6 +35,10 @@ public class ListOfLogs implements Writable {
             }
         }
         listOfLogs.add(l);
+        Event e = new Event("New Day added!");
+        eventLog.logEvent(e);
+
+
         return true;
     }
 
@@ -39,6 +46,8 @@ public class ListOfLogs implements Writable {
     // EFFECTS: removes log entry to the list of exercise given index i
     public void removeLog(int i) {
         listOfLogs.remove(i);
+        Event e = new Event("Selected day removed!");
+        eventLog.logEvent(e);
     }
 
     public int getLength() {

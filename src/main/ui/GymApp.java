@@ -1,9 +1,7 @@
 package ui;
 
-import model.Exercise;
-import model.ListOfExercises;
-import model.ListOfLogs;
-import model.Log;
+import model.*;
+import model.Event;
 import org.json.JSONArray;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -14,6 +12,8 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLOutput;
@@ -52,6 +52,8 @@ public class GymApp extends JPanel {
     private JTextField reps;
     private JTextField sets;
     private JTextField weight;
+
+    private EventLog logsOfEvent = EventLog.getInstance();
 
 
     // EFFECTS: runs the gym tracker application
@@ -99,6 +101,8 @@ public class GymApp extends JPanel {
 
 
         mainPanel.add(loePanel);
+
+
     }
 
     private void dayButtons() {
@@ -144,6 +148,14 @@ public class GymApp extends JPanel {
         frame.add(mainPanel);
 
 
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                for (Event event : logsOfEvent) {
+                    System.out.println(event.toString());
+                }
+            }
+
+        });
 
     }
 
