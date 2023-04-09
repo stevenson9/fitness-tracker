@@ -33,6 +33,30 @@ fun to create my own **progress tracker**.
 - **As a suer**, Whenever I start the app, I want to have the option to load in my progress with a file
 
 
+### Phase 4: Task 2
+
+Sat Apr 08 17:41:09 PDT 2023  
+02/25/23 Day added!   
+Sat Apr 08 17:42:01 PDT 2023   
+04/07/23 Day added!  
+Sat Apr 08 17:45:20 PDT 2023  
+04/08/23 Day added!  
+Sat Apr 08 17:45:32 PDT 2023  
+04/08/23 Day removed!  
+Sat Apr 08 17:45:44 PDT 2023  
+04/08/23 Day added!  
+
+### Phase 4: Task 3
+
+If I had more time to work on this project, I would most likely
+refactor a lot of my "ListOf__" classes so that they would extend an abstract 
+or interface class as there is a lot of repeated code shared between these two classes. Furthermore,
+using one of the design patterns learned in class, I would possibly
+explore another way of designing my application, rather than having the 
+classes I have right now. As for my UI package, I would attempt to
+refactor a lot of the Java Swing code so that it is more readable, as it is fairly unorganized
+at the moment.
+
 
 
 

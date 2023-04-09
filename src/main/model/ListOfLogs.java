@@ -35,7 +35,7 @@ public class ListOfLogs implements Writable {
             }
         }
         listOfLogs.add(l);
-        Event e = new Event("New Day added!");
+        Event e = new Event(l.getDate() + " Day added!");
         eventLog.logEvent(e);
 
 
@@ -45,9 +45,11 @@ public class ListOfLogs implements Writable {
     // MODIFIES: this
     // EFFECTS: removes log entry to the list of exercise given index i
     public void removeLog(int i) {
-        listOfLogs.remove(i);
-        Event e = new Event("Selected day removed!");
+        Event e = new Event(listOfLogs.get(i).getDate() + " Day removed!");
         eventLog.logEvent(e);
+        listOfLogs.remove(i);
+
+
     }
 
     public int getLength() {
