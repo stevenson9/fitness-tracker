@@ -1,6 +1,6 @@
 
 
-# Gym Tracker :memo:
+# Fitness Tracker :memo:
 
 ### Keep track of your gains! :muscle:
 <br>
